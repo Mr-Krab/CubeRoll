@@ -1,0 +1,19 @@
+[
+    {
+        "modid": "cuberoll",
+        "name": "CubeRoll",
+        "version": "1.0.0-S7.1-BETA",
+        "description": "Throw dice to play something.",
+        "authorList": [
+            "Mr_Krab"
+        ],
+        "dependencies": [
+            "spongeapi@7.1.0",
+            "localeapi"
+        ],
+        "requiredMods": [
+            "spongeapi@7.1.0",
+            "localeapi"
+        ]
+    }
+]
