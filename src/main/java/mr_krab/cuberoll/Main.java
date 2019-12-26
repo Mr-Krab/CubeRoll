@@ -59,8 +59,8 @@ public class Main {
 
 	public void commandRegister() {
 		CommandSpec commandRoll = CommandSpec.builder()
-				.permission("cuberoll.roll")
-				.arguments(GenericArguments.optional(GenericArguments.integer(Text.of("MaxValue"))))
+		.permission("cuberoll.roll")
+		.arguments(GenericArguments.optional(GenericArguments.integer(Text.of("MaxValue"))))
     	        .executor((src, args) -> {
     	        	if(!(src instanceof Player)) {
         	            throw new CommandException(getDefaultLocale().getString("only-player"));
@@ -90,8 +90,8 @@ public class Main {
     	        .build();
 
 		CommandSpec commandTry = CommandSpec.builder()
-				.permission("cuberoll.try")
-				.arguments(GenericArguments.optional(GenericArguments.remainingJoinedStrings(Text.of("Text"))))
+		.permission("cuberoll.try")
+		.arguments(GenericArguments.optional(GenericArguments.remainingJoinedStrings(Text.of("Text"))))
     	        .executor((src, args) -> {
     	        	if(!(src instanceof Player)) {
         	            throw new CommandException(getDefaultLocale().getString("only-player"));
@@ -99,30 +99,30 @@ public class Main {
     	        	if(!args.<String>getOne(Text.of("Text")).isPresent()) {
         	            throw new CommandException(getOrDefaultLocale(src.getLocale()).getString("empty-message"));
     	        	}
-        			String message = args.<String>getOne(Text.of("Text")).get();
-	        		Random random = new Random();
-	        		int value = random.nextInt(2);
-	        		if(value == 0) {
-	        			for(Player player : Sponge.getServer().getOnlinePlayers()) {
-	        				Locale locale = player.getLocale();
-	        				player.sendMessage(getOrDefaultLocale(locale)
-	        						.getString("command-try", src.getName(), message, getOrDefaultLocale(locale).getLegacyString("failure", true)));
-	        			}
-	        			MessageChannel.TO_CONSOLE.send(getDefaultLocale()
-	        					.getString("command-try", src.getName(), message, getDefaultLocale().getLegacyString("failure", true)));
+        		String message = args.<String>getOne(Text.of("Text")).get();
+	        	Random random = new Random();
+	        	int value = random.nextInt(2);
+	        	if(value == 0) {
+	        		for(Player player : Sponge.getServer().getOnlinePlayers()) {
+	        			Locale locale = player.getLocale();
+	        			player.sendMessage(getOrDefaultLocale(locale)
+	        				.getString("command-try", src.getName(), message, getOrDefaultLocale(locale).getLegacyString("failure", true)));
+	        		}
+	        		MessageChannel.TO_CONSOLE.send(getDefaultLocale()
+	        			.getString("command-try", src.getName(), message, getDefaultLocale().getLegacyString("failure", true)));
 	        		}
 	        		if(value == 1) {
 	        			for(Player player : Sponge.getServer().getOnlinePlayers()) {
 	        				Locale locale = player.getLocale();
 	        				player.sendMessage(getOrDefaultLocale(locale)
-	        						.getString("command-try", src.getName(), message, getOrDefaultLocale(locale).getLegacyString("luck", true)));
+	        					.getString("command-try", src.getName(), message, getOrDefaultLocale(locale).getLegacyString("luck", true)));
 	        			}
 	        			MessageChannel.TO_CONSOLE.send(getDefaultLocale()
-	        					.getString("command-try", src.getName(), message, getDefaultLocale().getLegacyString("luck", true)));
+	        				.getString("command-try", src.getName(), message, getDefaultLocale().getLegacyString("luck", true)));
 	        		}
     	            return CommandResult.success();
     	        })
-				.build();
+		.build();
 		
 		Sponge.getCommandManager().register(this, commandRoll, "roll");
 		Sponge.getCommandManager().register(this, commandTry, "try");
